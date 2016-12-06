@@ -1,7 +1,6 @@
 node {
     stage('Preparation') {
         git 'https://github.com/thradec/hello-app'
-        sh 'chmod a+x ./mvnw'
     }
     stage('Build') {
         sh './mvnw compile'
