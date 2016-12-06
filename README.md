@@ -1,5 +1,7 @@
 # HELLO-APP
 
+[![Build Status](https://travis-ci.org/thradec/hello-app.svg?branch=master)](https://travis-ci.org/thradec/hello-app)
+
 Private simple playground application.
 
 
