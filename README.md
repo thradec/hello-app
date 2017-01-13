@@ -14,25 +14,25 @@ $./mvnw clean verify [-Pprofile]
 available profiles:
 * `db.h2` activated by default
 * `db.postgres` requires postgres database (see _application-db.postgres.properties_)
+* `docker` build docker image
 
 
 
-### How to run hello-service
+### How to run hello-app
 
 * with maven
 ```
-$ ./mvnw -f hello-service/pom.xml spring-boot:run
+$ ./mvnw -f hello-app/pom.xml spring-boot:run
 ```
 
 * with java
 ```
-$ java -jar hello-service/target/hello-service-0.0.1-SNAPSHOT.jar
+$ java -jar hello-app/target/hello-app-0.0.1-SNAPSHOT.jar
 ```
 
-* with docker
+* with docker (image is built with _docker_ profile)
 ```
-$ ./mvnw clean package docker:build
-$ docker run -d -p 8090:8090 -t hello-service
+$ docker run -d -p 8090:8090 -t hello-app
 ```
 
 

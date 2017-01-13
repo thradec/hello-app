@@ -1,4 +1,4 @@
-package cz.thradec.hello.domain;
+package cz.thradec.hello.service;
 
 public interface HelloService {
 

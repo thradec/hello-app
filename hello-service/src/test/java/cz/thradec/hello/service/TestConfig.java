@@ -1,14 +1,20 @@
-package cz.thradec.hello;
+package cz.thradec.hello.service;
 
 import javax.sql.DataSource;
 
 import net.ttddyy.dsproxy.support.ProxyDataSourceBuilder;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@ComponentScan
+@EnableAutoConfiguration
+@EnableCaching
 public class TestConfig {
 
     @Bean

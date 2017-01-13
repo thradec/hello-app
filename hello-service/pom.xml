@@ -4,22 +4,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>cz.thradec.hello-app</groupId>
-        <artifactId>hello-app</artifactId>
+        <groupId>cz.thradec.hello</groupId>
+        <artifactId>hello-parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>hello-service</artifactId>
-    <name>hello-service</name>
     <packaging>jar</packaging>
-
-    <properties>
-        <version.lombok>1.16.10</version.lombok>
-        <version.postgres>9.3-1102.jdbc4</version.postgres>
-        <version.flyway>4.0.3</version.flyway>
-        <version.datasource-proxy>1.3.3</version.datasource-proxy>
-        <version.docker-maven-plugin>0.4.13</version.docker-maven-plugin>
-    </properties>
 
     <dependencies>
 
@@ -47,91 +38,17 @@
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
-            <version>${version.flyway}</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>${version.lombok}</version>
         </dependency>
         <dependency>
             <groupId>net.ttddyy</groupId>
             <artifactId>datasource-proxy</artifactId>
-            <version>${version.datasource-proxy}</version>
             <scope>test</scope>
         </dependency>
 
     </dependencies>
-
-    <profiles>
-
-        <profile>
-            <id>db.h2</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <profiles>db.h2</profiles>
-            </properties>
-            <dependencies>
-                <dependency>
-                    <groupId>com.h2database</groupId>
-                    <artifactId>h2</artifactId>
-                </dependency>
-            </dependencies>
-        </profile>
-
-        <profile>
-            <id>db.postgres</id>
-            <properties>
-                <profiles>db.postgres</profiles>
-            </properties>
-            <dependencies>
-                <dependency>
-                    <groupId>postgresql</groupId>
-                    <artifactId>postgresql</artifactId>
-                    <version>${version.postgres}</version>
-                </dependency>
-            </dependencies>
-        </profile>
-
-    </profiles>
-
-    <build>
-
-        <plugins>
-
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-                <groupId>pl.project13.maven</groupId>
-                <artifactId>git-commit-id-plugin</artifactId>
-                <configuration>
-                    <dotGitDirectory>${project.basedir}/../.git</dotGitDirectory>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-                <version>${version.docker-maven-plugin}</version>
-                <configuration>
-                    <imageName>${project.artifactId}</imageName>
-                    <dockerDirectory>src/main/docker</dockerDirectory>
-                    <resources>
-                        <resource>
-                            <targetPath>/</targetPath>
-                            <directory>${project.build.directory}</directory>
-                            <include>${project.build.finalName}.jar</include>
-                        </resource>
-                    </resources>
-                </configuration>
-            </plugin>
-
-        </plugins>
-    </build>
 
 </project>
