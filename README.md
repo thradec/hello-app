@@ -17,22 +17,22 @@ available profiles:
 
 
 
-### How to run
+### How to run hello-service
 
 * with maven
 ```
-$ ./mvnw spring-boot:run
+$ ./mvnw -f hello-service/pom.xml spring-boot:run
 ```
 
 * with java
 ```
-$ java -jar target/hello-app-0.0.1-SNAPSHOT.jar
+$ java -jar hello-service/target/hello-service-0.0.1-SNAPSHOT.jar
 ```
 
 * with docker
 ```
 $ ./mvnw clean package docker:build
-$ docker run -d -p 8090:8090 -t hello-app
+$ docker run -d -p 8090:8090 -t hello-service
 ```
 
 
@@ -40,7 +40,7 @@ $ docker run -d -p 8090:8090 -t hello-app
  
 * use postgres docker image for testing
 ```
-$ docker run --name hello-app-db -p 5432:5432 -e POSTGRES_PASSWORD=123456 -d postgres
+$ docker run --name hello-db -p 5432:5432 -e POSTGRES_PASSWORD=123456 -d postgres
 ```
 
 * use jenkins docker image for testing CI pipeline alias _Jenkinsfile_
