@@ -2,6 +2,8 @@ package cz.thradec.hello.service;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,7 +36,7 @@ public class HelloController {
     }
 
     @PostMapping
-    public Hello saveHello(@RequestBody Hello hello) {
+    public Hello saveHello(@RequestBody @Valid Hello hello) {
         return helloRepository.save(hello);
     }
 
