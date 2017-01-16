@@ -6,15 +6,10 @@ import java.util.List;
 
 import net.ttddyy.dsproxy.QueryCountHolder;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cache.CacheManager;
-import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = TestConfig.class)
-public class HelloRepositoryTest {
+public class HelloRepositoryTest extends AbstractTest {
 
     @Autowired
     private CacheManager cacheManager;

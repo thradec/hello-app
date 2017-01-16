@@ -3,7 +3,6 @@ package cz.thradec.hello.service;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.entry;
 import static org.mockito.BDDMockito.given;
-import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.springframework.http.HttpStatus.OK;
@@ -11,18 +10,13 @@ import static org.springframework.http.HttpStatus.OK;
 import java.util.Map;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = TestConfig.class, webEnvironment = RANDOM_PORT)
-public class HelloControllerTest {
+public class HelloControllerTest extends AbstractTest {
 
     @Autowired
     private TestRestTemplate restTemplate;
