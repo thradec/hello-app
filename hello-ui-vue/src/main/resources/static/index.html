@@ -2,49 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>hello-ui-vue</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <script src="https://unpkg.com/vue/dist/vue.js"></script>
-    <script src="https://cdn.jsdelivr.net/vue.resource/1.0.3/vue-resource.min.js"></script>
+    <title>hello-app</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
-<div id="app">
-    <div class="container">
-        <div class="row">
-            <div class="jumbotron">
-                <div class="container">
-                    <div class="row">
-                        <h1 class="text-center">{{greeting}}</h1>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-11"></div>
-                        <div class="col-md-1">
-                            <a class="btn btn-lg btn-success" href="#" role="button" v-on:click="getGreeting">Next</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+<header>
+    <nav>
+        <div class="nav-wrapper grey darken-3">
+            <span style="padding-left: 20px">
+                <a href="#" class="brand-logo"><i class="material-icons">code</i>hello-app</a>
+            </span>
         </div>
-    </div>
-</div>
-<script>
-    new Vue({
-        el: "#app",
-        data: {
-            greeting: ""
-        },
-        methods: {
-            getGreeting: function (event) {
-                this.$http.get("/api/hello/random").then(function (response) {
-                    this.greeting = response.data.message;
-                });
-            }
-        },
-        created: function () {
-            this.getGreeting();
-        }
-    })
-</script>
+    </nav>
+</header>
+
+<p></p>
+
+<main>
+    <div id="app"></div>
+</main>
+
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+<script src="/dist/main.js"></script>
+
 </body>
 </html>
