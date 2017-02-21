@@ -5,22 +5,23 @@
             <nav>
                 <div class='nav-wrapper grey darken-3'>
                     <span id='app-logo'>
-                        <a href='#' class='app-name brand-logo'>
+                        <router-link to='/' class='app-name brand-logo'>
                             <i class='material-icons'>code</i>hello-app
-                        </a>
+                        </router-link>
                     </span>
+                    <ul class='right'>
+                        <li>
+                            <router-link to='/dev' title='Links to Actuator endpoints'>
+                                <i class='material-icons'>info_outline</i>
+                            </router-link>
+                        </li>
+                    </ul>
                 </div>
             </nav>
         </header>
 
         <main>
-            <div class='container'>
-                <div class='row'>
-                    <div class='col s6 offset-s3'>
-                        <hello-card></hello-card>
-                    </div>
-                </div>
-            </div>
+            <router-view></router-view>
         </main>
 
     </div>
@@ -29,13 +30,8 @@
 
 <script>
 
-import HelloCard from './HelloCard.vue'
-
 export default {
     name: 'app',
-    components: {
-        'hello-card': HelloCard
-    }
 }
 
 </script>

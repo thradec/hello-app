@@ -22,7 +22,7 @@ available profiles:
 
 * with maven
 ```
-$ ./mvnw -f hello-app/pom.xml spring-boot:run
+$ ./mvnw -f hello-app/pom.xml spring-boot:run [-Pprofile]
 ```
 
 * with java
