@@ -3,10 +3,9 @@ CREATE TABLE hello (
     message VARCHAR(255) NOT NULL
 );
 
-CREATE SEQUENCE hibernate_sequence
+CREATE SEQUENCE hello_sequence
     START WITH 1000
-    INCREMENT BY 50
-    CACHE 500;
+    INCREMENT BY 1;
 
 INSERT INTO hello VALUES (1, 'hello');
 INSERT INTO hello VALUES (2, 'ahoj');
