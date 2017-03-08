@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import VueResource from "vue-resource";
 import App from "./App.vue";
 import HelloCard from "./HelloCard.vue";
+import HelloAdmin from "./HelloAdmin.vue";
 import Dev from "./Dev.vue";
 
 
@@ -14,6 +15,7 @@ const router = new VueRouter({
     routes: [
         {path: '/', redirect: 'hello'},
         {path: '/hello', component: HelloCard},
+        {path: '/hello/admin', component: HelloAdmin},
         {path: '/dev', component: Dev}
     ]
 });

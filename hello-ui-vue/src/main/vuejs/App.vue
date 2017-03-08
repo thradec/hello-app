@@ -11,7 +11,12 @@
                     </span>
                     <ul class='right'>
                         <li>
-                            <router-link to='/dev' title='Links to Actuator endpoints'>
+                            <router-link to='/hello/admin' title='Administration'>
+                                <i class='material-icons'>playlist_add</i>
+                            </router-link>
+                        </li>
+                        <li>
+                            <router-link to='/dev' title='Development zone'>
                                 <i class='material-icons'>info_outline</i>
                             </router-link>
                         </li>

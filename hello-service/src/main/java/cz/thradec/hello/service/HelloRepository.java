@@ -18,4 +18,7 @@ public interface HelloRepository extends Repository<Hello, Long> {
     @CacheEvict(allEntries = true)
     Hello save(Hello hello);
 
+    @CacheEvict(allEntries = true)
+    Hello delete(Long id);
+
 }

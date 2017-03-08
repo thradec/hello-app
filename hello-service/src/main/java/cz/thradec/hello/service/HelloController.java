@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,6 +39,11 @@ public class HelloController {
     @PostMapping
     public Hello saveHello(@RequestBody @Valid Hello hello) {
         return helloRepository.save(hello);
+    }
+
+    @DeleteMapping("/{id}")
+    public Hello deleteHello(@PathVariable Long id) {
+        return helloRepository.delete(id);
     }
 
 }
