@@ -1,4 +1,4 @@
-package cz.thradec.hello.service;
+package cz.thradec.hello;
 
 import java.util.List;
 import java.util.Random;

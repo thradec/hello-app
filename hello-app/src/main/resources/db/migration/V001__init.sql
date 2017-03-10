@@ -5,7 +5,7 @@ CREATE TABLE hello (
 
 CREATE SEQUENCE hello_sequence
     START WITH 1000
-    INCREMENT BY 1;
+    INCREMENT BY 50;
 
 INSERT INTO hello VALUES (1, 'hello');
 INSERT INTO hello VALUES (2, 'ahoj');

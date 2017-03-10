@@ -1,4 +1,4 @@
-package cz.thradec.hello.service;
+package cz.thradec.hello;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -8,9 +8,14 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
-public class HelloValidatorTest extends AbstractTest {
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class HelloValidatorTest {
 
     @Autowired
     private Validator validator;

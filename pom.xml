@@ -28,7 +28,6 @@
     </properties>
 
     <modules>
-        <module>hello-service</module>
         <module>hello-ui-vue</module>
         <module>hello-app</module>
     </modules>

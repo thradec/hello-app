@@ -1,4 +1,4 @@
-package cz.thradec.hello.service;
+package cz.thradec.hello;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -6,10 +6,15 @@ import java.util.List;
 
 import net.ttddyy.dsproxy.QueryCountHolder;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cache.CacheManager;
+import org.springframework.test.context.junit4.SpringRunner;
 
-public class HelloRepositoryTest extends AbstractTest {
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class HelloRepositoryTest {
 
     @Autowired
     private CacheManager cacheManager;

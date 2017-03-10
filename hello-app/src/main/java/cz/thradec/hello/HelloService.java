@@ -1,4 +1,4 @@
-package cz.thradec.hello.service;
+package cz.thradec.hello;
 
 public interface HelloService {
 
