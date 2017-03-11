@@ -70,6 +70,7 @@
         <dependency>
             <groupId>net.ttddyy</groupId>
             <artifactId>datasource-proxy</artifactId>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>
