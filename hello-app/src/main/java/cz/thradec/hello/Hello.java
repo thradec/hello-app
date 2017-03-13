@@ -9,15 +9,11 @@ import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 public class Hello implements Serializable {
 
@@ -31,5 +27,9 @@ public class Hello implements Serializable {
     @NotNull
     @Size(min = 1, max = 255)
     private String message;
+
+    public Hello(String message) {
+        this.message = message;
+    }
 
 }

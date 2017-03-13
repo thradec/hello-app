@@ -31,7 +31,7 @@ public class HelloControllerTest {
 
     @Test
     public void shouldGetHello() {
-        given(helloRepository.findById(1L)).willReturn(new Hello(1L, "mock"));
+        given(helloRepository.findById(1L)).willReturn(new Hello("mock"));
 
         ResponseEntity<Hello> response = restTemplate.getForEntity("/api/hello/{id}", Hello.class, 1L);
 

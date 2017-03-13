@@ -22,7 +22,7 @@ public class HelloValidatorTest {
 
     @Test
     public void shouldValidate() {
-        Hello hello = new Hello(1L, "");
+        Hello hello = new Hello("");
         Set<ConstraintViolation<Hello>> violations = validator.validate(hello);
 
         assertThat(violations)
