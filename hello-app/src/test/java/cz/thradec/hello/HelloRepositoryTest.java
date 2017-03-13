@@ -1,9 +1,12 @@
 package cz.thradec.hello;
 
+import static java.util.Comparator.comparing;
+import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 
+import cz.thradec.hello.HelloRepository.Order;
 import net.ttddyy.dsproxy.QueryCountHolder;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,17 +30,33 @@ public class HelloRepositoryTest {
     }
 
     @Test
-    public void shouldFindAll() {
-        List<Hello> helloList = helloRepository.findAll();
-        assertThat(helloList).containsAll(testData.getHelloList());
+    public void shouldFindAllOrderById() {
+        List<Hello> helloList = helloRepository.findAll(Order.BY_ID);
+        assertThat(helloList)
+                .containsExactlyElementsOf(
+                        testData.getHelloList()
+                                .stream()
+                                .sorted(comparing(Hello::getId))
+                                .collect(toList()));
     }
 
     @Test
-    public void shouldCacheFindAll() {
+    public void shouldFindAllOrderByMessage() {
+        List<Hello> helloList = helloRepository.findAll(Order.BY_MESSAGE);
+        assertThat(helloList)
+                .containsExactlyElementsOf(
+                        testData.getHelloList()
+                                .stream()
+                                .sorted(comparing(Hello::getMessage))
+                                .collect(toList()));
+    }
+
+    @Test
+    public void shouldFindAllAndCache() {
         QueryCountHolder.clear();
 
-        helloRepository.findAll();
-        helloRepository.findAll();
+        helloRepository.findAll(Order.BY_ID);
+        helloRepository.findAll(Order.BY_ID);
 
         assertThat(QueryCountHolder.getGrandTotal().getSelect()).isEqualTo(1);
     }

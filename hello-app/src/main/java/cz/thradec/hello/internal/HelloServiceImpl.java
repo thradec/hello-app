@@ -5,6 +5,7 @@ import java.util.Random;
 
 import cz.thradec.hello.Hello;
 import cz.thradec.hello.HelloRepository;
+import cz.thradec.hello.HelloRepository.Order;
 import cz.thradec.hello.HelloService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,7 +34,7 @@ class HelloServiceImpl implements HelloService {
     }
 
     private Hello randomHello_v1() {
-        List<Hello> helloList = helloRepository.findAll();
+        List<Hello> helloList = helloRepository.findAll(Order.BY_ID);
         return helloList.get(random.nextInt(helloList.size()));
     }
 
