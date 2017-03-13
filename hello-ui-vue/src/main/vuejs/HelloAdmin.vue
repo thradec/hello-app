@@ -11,7 +11,7 @@
                         <tr>
                             <td>#</td>
                             <td>
-                                <input placeholder='new greeting ...' type='text' v-model='newHello.message'>
+                                <input placeholder='new greeting ...' type='text' v-model='newHello.message' @keyup.enter='createHello'>
                             </td>
                             <td class="col-btn">
                                 <a role='btn-create' class='btn-floating waves-effect waves-light green'
@@ -68,6 +68,9 @@ export default {
         },
 
         createHello: function() {
+            if( !this.createHelloEnabled ) {
+                return;
+            }
             let self = this;
             self.$http.post('/api/hello', self.newHello)
                 .then(function(res) {
