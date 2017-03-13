@@ -2,13 +2,14 @@ package cz.thradec.hello;
 
 import java.util.List;
 
+import cz.thradec.hello.internal.HelloRepositoryCustom;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.repository.Repository;
 
 @CacheConfig(cacheNames = "hello")
-public interface HelloRepository extends Repository<Hello, Long> {
+public interface HelloRepository extends HelloRepositoryCustom, Repository<Hello, Long> {
 
     @Cacheable
     List<Hello> findAll();

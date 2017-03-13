@@ -42,4 +42,10 @@ public class HelloRepositoryTest {
         assertThat(QueryCountHolder.getGrandTotal().getSelect()).isEqualTo(1);
     }
 
+    @Test
+    public void shouldFindRandom() {
+        Hello hello = helloRepository.findRandom();
+        assertThat(hello).isIn(testData.getHelloList());
+    }
+
 }
