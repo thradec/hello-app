@@ -1,23 +1,25 @@
 package cz.thradec.hello;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.entry;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.then;
+import static org.mockito.Matchers.anyObject;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
-import static org.springframework.http.HttpStatus.BAD_REQUEST;
-import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
-import static org.springframework.http.HttpStatus.OK;
+import static org.springframework.http.MediaType.APPLICATION_JSON;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.util.Map;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
 @RunWith(SpringRunner.class)
@@ -25,36 +27,63 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 public class HelloControllerTest {
 
     @Autowired
-    private TestRestTemplate restTemplate;
+    private MockMvc mvc;
+    @Autowired
+    private ObjectMapper mapper;
     @MockBean
     private HelloRepository helloRepository;
 
     @Test
-    public void shouldGetHello() {
-        given(helloRepository.findById(1L)).willReturn(new Hello("mock"));
+    public void shouldGetHello() throws Exception {
+        given(helloRepository.findById(1L))
+                .willReturn(new Hello("mock"));
 
-        ResponseEntity<Hello> response = restTemplate.getForEntity("/api/hello/{id}", Hello.class, 1L);
-
-        assertThat(response.getStatusCode()).isEqualTo(OK);
-        assertThat(response.getBody().getMessage()).isEqualTo("mock");
+        mvc.perform(get("/api/hello/{id}", 1))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("message").value("mock"));
     }
 
     @Test
-    public void shouldValidateHello() {
-        ResponseEntity<Map> response = restTemplate.postForEntity("/api/hello", new Hello(), Map.class);
-
-        assertThat(response.getStatusCode()).isEqualTo(BAD_REQUEST);
-        assertThat(response.getBody()).contains(entry("exception", MethodArgumentNotValidException.class.getName()));
+    @WithMockUser
+    public void shouldValidateHello() throws Exception {
+        mvc.perform(post("/api/hello")
+                .contentType(APPLICATION_JSON)
+                .content("{}"))
+                .andExpect(status().isBadRequest())
+                .andExpect(result -> result.getResolvedException().equals(MethodArgumentNotValidException.class));
     }
 
     @Test
-    public void shouldReturn500ForUnexpectedException() {
-        given(helloRepository.findById(1L)).willThrow(NullPointerException.class);
+    @WithMockUser
+    public void shouldSaveHello() throws Exception {
+        mvc.perform(post("/api/hello")
+                .contentType(APPLICATION_JSON)
+                .content(mapper.writeValueAsString(new Hello("test"))))
+                .andExpect(status().isOk());
 
-        ResponseEntity<Map> response = restTemplate.getForEntity("/api/hello/{id}", Map.class, 1L);
+        then(helloRepository).should().save(anyObject());
+    }
 
-        assertThat(response.getStatusCode()).isEqualTo(INTERNAL_SERVER_ERROR);
-        assertThat(response.getBody()).contains(entry("exception", NullPointerException.class.getName()));
+    @Test
+    @WithMockUser(roles = "ADMIN")
+    public void shouldDeleteHello() throws Exception {
+        mvc.perform(delete("/api/hello/{id}", 1))
+                .andExpect(status().isOk());
+
+        then(helloRepository).should().delete(1L);
+    }
+
+    @Test
+    public void shouldReturn401ForUnauthorized() throws Exception {
+        mvc.perform(post("/api/hello"))
+                .andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    @WithMockUser(roles = "INSUFFICIENT")
+    public void shouldReturn403ForForbidden() throws Exception {
+        mvc.perform(delete("/api/hello/{id}", 1))
+                .andExpect(status().isForbidden());
     }
 
 }

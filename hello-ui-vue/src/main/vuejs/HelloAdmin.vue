@@ -8,7 +8,7 @@
 
                     <table class='bordered highlight'>
                         <tbody>
-                        <tr>
+                        <tr v-if='user.isAuthenticated'>
                             <td>#</td>
                             <td>
                                 <input placeholder='new greeting ...' type='text' v-model='newHello.message' @keyup.enter='createHello'>
@@ -22,7 +22,8 @@
                             <td>#{{hello.id}}</td>
                             <td>{{hello.message}}</td>
                             <td class="col-btn">
-                                <a role='btn-delete' class='btn-floating waves-effect waves-light red'
+                                <a v-if='user.isAdmin'
+                                   role='btn-delete' class='btn-floating waves-effect waves-light red'
                                    @click.prevent='deleteHello(hello.id)'><i class='material-icons'>delete</i></a>
                             </td>
                         </tr>
@@ -38,11 +39,14 @@
 
 <script>
 
+import user from './user';
+
 export default {
     name: 'hello-admin',
 
     data() {
         return {
+            user: user,
             newHello: {
                 message: ''
             },
