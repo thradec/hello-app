@@ -23,8 +23,9 @@
         <version.flyway>4.1.2</version.flyway>
         <version.datasource-proxy>1.4.1</version.datasource-proxy>
         <version.docker-maven-plugin>0.4.13</version.docker-maven-plugin>
-        <profiles>${profile.db}</profiles>
+        <profiles>${profile.db} ${profile.ssl}</profiles>
         <profile.db></profile.db>
+        <profile.ssl></profile.ssl>
     </properties>
 
     <modules>
@@ -82,6 +83,13 @@
                     <version>${version.postgres}</version>
                 </dependency>
             </dependencies>
+        </profile>
+
+        <profile>
+            <id>ssl</id>
+            <properties>
+                <profile.ssl>, ssl</profile.ssl>
+            </properties>
         </profile>
 
     </profiles>

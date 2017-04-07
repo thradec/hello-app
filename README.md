@@ -14,6 +14,7 @@ $./mvnw clean verify [-Pprofile]
 available profiles:
 * `db.h2` activated by default
 * `db.postgres` requires postgres database (see _application-db.postgres.properties_)
+* `ssl` enable SSL, the application will be available on _https://localhost:8443/_
 * `docker` build docker image
 
 
