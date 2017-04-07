@@ -12,15 +12,21 @@ import org.springframework.data.repository.Repository;
 @CacheConfig(cacheNames = "hello")
 public interface HelloRepository extends HelloRepositoryCustom, Repository<Hello, Long> {
 
-    interface Order {
-        Sort BY_ID = new Sort("id");
-        Sort BY_MESSAGE = new Sort("message");
+    static Sort orderById() {
+        return new Sort("id");
+    }
+
+    static Sort orderByMessage() {
+        return new Sort("message");
     }
 
     @Cacheable
     List<Hello> findAll(Sort sort);
 
     Hello findById(Long id);
+
+    @Override
+    Hello findRandom();
 
     @CacheEvict(allEntries = true)
     Hello save(Hello hello);
