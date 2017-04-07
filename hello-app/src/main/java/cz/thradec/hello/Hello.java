@@ -1,6 +1,7 @@
 package cz.thradec.hello;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,6 +31,22 @@ public class Hello implements Serializable {
 
     public Hello(String message) {
         this.message = message;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o instanceof Hello) {
+            return id != null && Objects.equals(id, ((Hello) o).getId());
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return 31;
     }
 
 }
