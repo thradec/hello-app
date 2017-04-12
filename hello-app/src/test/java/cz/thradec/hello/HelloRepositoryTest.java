@@ -5,6 +5,8 @@ import static cz.thradec.hello.HelloRepository.orderByMessage;
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.springframework.test.jdbc.JdbcTestUtils.countRowsInTableWhere;
 
 import java.util.List;
 
@@ -14,6 +16,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.test.context.support.WithAnonymousUser;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
@@ -24,6 +30,8 @@ public class HelloRepositoryTest {
     private HelloRepository helloRepository;
     @Autowired
     private TestData testData;
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     @Before
     public void init() {
@@ -66,6 +74,33 @@ public class HelloRepositoryTest {
     public void shouldFindRandom() {
         Hello hello = helloRepository.findRandom();
         assertThat(hello).isIn(testData.getHelloList());
+    }
+
+    @Test
+    @WithMockUser(roles = "ADMIN")
+    public void shouldSaveAndDelete() {
+        Hello hello = helloRepository.save(new Hello("test"));
+
+        assertThat(hello.getId()).isNotNull();
+        assertThat(countRowsInTableWhere(jdbcTemplate, "Hello", "message = 'test'")).isEqualTo(1);
+
+        helloRepository.delete(hello.getId());
+
+        assertThat(countRowsInTableWhere(jdbcTemplate, "Hello", "message = 'test'")).isEqualTo(0);
+    }
+
+    @Test
+    @WithAnonymousUser
+    public void shouldNotSaveIfNotAuthenticated() {
+        assertThatThrownBy(() -> helloRepository.save(new Hello()))
+                .isInstanceOf(AccessDeniedException.class);
+    }
+
+    @Test
+    @WithMockUser
+    public void shouldNotDeleteIfNotAdmin() {
+        assertThatThrownBy(() -> helloRepository.delete(-1L))
+                .isInstanceOf(AccessDeniedException.class);
     }
 
 }
