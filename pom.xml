@@ -22,6 +22,7 @@
         <version.postgres>9.3-1102.jdbc4</version.postgres>
         <version.flyway>4.1.2</version.flyway>
         <version.datasource-proxy>1.4.1</version.datasource-proxy>
+        <version.unboundid-ldapsdk>3.2.1</version.unboundid-ldapsdk>
         <version.docker-maven-plugin>0.4.13</version.docker-maven-plugin>
         <profiles>${profile.db} ${profile.ssl}</profiles>
         <profile.db></profile.db>
@@ -49,6 +50,11 @@
                 <groupId>net.ttddyy</groupId>
                 <artifactId>datasource-proxy</artifactId>
                 <version>${version.datasource-proxy}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.unboundid</groupId>
+                <artifactId>unboundid-ldapsdk</artifactId>
+                <version>${version.unboundid-ldapsdk}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

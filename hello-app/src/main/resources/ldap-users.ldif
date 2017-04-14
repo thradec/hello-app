@@ -1,0 +1,48 @@
+dn: dc=thradec,dc=cz
+objectclass: top
+objectclass: domain
+objectclass: extensibleObject
+dc: thradec
+
+dn: ou=groups,dc=thradec,dc=cz
+objectclass: top
+objectclass: organizationalUnit
+ou: groups
+
+dn: ou=people,dc=thradec,dc=cz
+objectclass: top
+objectclass: organizationalUnit
+ou: people
+
+dn: uid=admin,ou=people,dc=thradec,dc=cz
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: Admin
+sn: Admin
+uid: admin
+userPassword: 123456
+
+dn: uid=user,ou=people,dc=thradec,dc=cz
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: User
+sn: User
+uid: user
+userPassword: 123456
+
+dn: cn=user,ou=groups,dc=thradec,dc=cz
+objectclass: top
+objectclass: groupOfUniqueNames
+ou: user
+uniqueMember: uid=admin,ou=people,dc=thradec,dc=cz
+uniqueMember: uid=user,ou=people,dc=thradec,dc=cz
+
+dn: cn=admin,ou=groups,dc=thradec,dc=cz
+objectclass: top
+objectclass: groupOfUniqueNames
+ou: admin
+uniqueMember: uid=admin,ou=people,dc=thradec,dc=cz
