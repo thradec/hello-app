@@ -30,12 +30,41 @@
     </properties>
 
     <modules>
+        <module>hello-service</module>
+        <module>hello-api-rest</module>
+        <module>hello-security-ldap</module>
+        <module>hello-security-ssh</module>
         <module>hello-ui-vue</module>
         <module>hello-app</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>cz.thradec.hello</groupId>
+                <artifactId>hello-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cz.thradec.hello</groupId>
+                <artifactId>hello-api-rest</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cz.thradec.hello</groupId>
+                <artifactId>hello-security-ldap</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cz.thradec.hello</groupId>
+                <artifactId>hello-security-ssh</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cz.thradec.hello</groupId>
+                <artifactId>hello-ui-vue</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-core</artifactId>

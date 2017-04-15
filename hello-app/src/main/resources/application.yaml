@@ -3,22 +3,9 @@ server:
     port: 8090
 management:
     context-path: /dev
+    security.enabled: false
 spring:
     jackson:
-        serialization:
-            indent_output: true
-    jpa:
-        properties:
-            hibernate:
-                ddl-auto: validate
-                format_sql: true
-                id.new_generator_mappings: true
-    ldap:
-        embedded:
-            base-dn: dc=thradec,dc=cz
-            ldif: classpath:ldap-users.ldif
+        serialization.indent_output: true
     profiles:
-        active: '@profiles@'
-logging:
-    level:
-        org.hibernate.SQL: debug
+        active: @profiles@
