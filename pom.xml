@@ -25,42 +25,15 @@
         <version.springfox>2.6.1</version.springfox>
         <version.unboundid-ldapsdk>3.2.1</version.unboundid-ldapsdk>
         <version.docker-maven-plugin>0.4.13</version.docker-maven-plugin>
-        <profiles>${profile.db} ${profile.ssl}</profiles>
-        <profile.db></profile.db>
-        <profile.ssl></profile.ssl>
     </properties>
 
     <modules>
-        <module>hello-service</module>
-        <module>hello-api-rest</module>
-        <module>hello-security-ldap</module>
-        <module>hello-security-ssh</module>
         <module>hello-ui-vue</module>
         <module>hello-app</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>cz.thradec.hello</groupId>
-                <artifactId>hello-service</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>cz.thradec.hello</groupId>
-                <artifactId>hello-api-rest</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>cz.thradec.hello</groupId>
-                <artifactId>hello-security-ldap</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>cz.thradec.hello</groupId>
-                <artifactId>hello-security-ssh</artifactId>
-                <version>${project.version}</version>
-            </dependency>
             <dependency>
                 <groupId>cz.thradec.hello</groupId>
                 <artifactId>hello-ui-vue</artifactId>
@@ -106,9 +79,6 @@
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
-            <properties>
-                <profile.db>db.h2</profile.db>
-            </properties>
             <dependencies>
                 <dependency>
                     <groupId>com.h2database</groupId>
@@ -119,9 +89,6 @@
 
         <profile>
             <id>db.postgres</id>
-            <properties>
-                <profile.db>db.postgres</profile.db>
-            </properties>
             <dependencies>
                 <dependency>
                     <groupId>postgresql</groupId>
@@ -130,14 +97,6 @@
                 </dependency>
             </dependencies>
         </profile>
-
-        <profile>
-            <id>ssl</id>
-            <properties>
-                <profile.ssl>, ssl</profile.ssl>
-            </properties>
-        </profile>
-
     </profiles>
 
 </project>
