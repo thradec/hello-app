@@ -1,9 +1,6 @@
-debug: true
+debug: false
 server:
     port: 8090
-management:
-    context-path: /dev
-    security.enabled: false
 spring:
     jackson:
         serialization.indent_output: true
@@ -18,3 +15,4 @@ spring:
             base-dn: dc=thradec,dc=cz
             ldif: classpath:ldap-users.ldif
 logging.level.org.hibernate.SQL: debug
+management.endpoints.web.expose: "*"

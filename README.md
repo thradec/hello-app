@@ -52,6 +52,7 @@ $ docker run -p 8091:8080 -p 50000:50000 jenkins
 
 ### Testing with CURL
 ```
+curl localhost:8090/actuator/health
 curl localhost:8090/api/hello
 curl localhost:8090/api/hello/random
 curl -X POST -H "Content-Type: application/json" -d '{"message":"unauthorized"}' localhost:8090/api/hello
