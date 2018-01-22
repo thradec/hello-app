@@ -70,7 +70,7 @@ public class HelloControllerTest {
         mvc.perform(delete("/api/hello/{id}", 1))
                 .andExpect(status().isOk());
 
-        then(helloRepository).should().delete(1L);
+        then(helloRepository).should().deleteById(1L);
     }
 
     @Test

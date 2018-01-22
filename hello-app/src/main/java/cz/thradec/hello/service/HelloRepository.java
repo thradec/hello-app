@@ -34,6 +34,6 @@ public interface HelloRepository extends HelloRepositoryCustom, Repository<Hello
 
     @PreAuthorize("hasRole('ADMIN')")
     @CacheEvict(allEntries = true)
-    Hello delete(Long id);
+    Hello deleteById(Long id);
 
 }

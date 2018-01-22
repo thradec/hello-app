@@ -85,7 +85,7 @@ public class HelloRepositoryTest {
         assertThat(hello.getId()).isNotNull();
         assertThat(countRowsInTableWhere(jdbcTemplate, "Hello", "message = 'test'")).isEqualTo(1);
 
-        helloRepository.delete(hello.getId());
+        helloRepository.deleteById(hello.getId());
 
         assertThat(countRowsInTableWhere(jdbcTemplate, "Hello", "message = 'test'")).isEqualTo(0);
     }
@@ -100,7 +100,7 @@ public class HelloRepositoryTest {
     @Test
     @WithMockUser
     public void shouldNotDeleteIfNotAdmin() {
-        assertThatThrownBy(() -> helloRepository.delete(-1L))
+        assertThatThrownBy(() -> helloRepository.deleteById(-1L))
                 .isInstanceOf(AccessDeniedException.class);
     }
 

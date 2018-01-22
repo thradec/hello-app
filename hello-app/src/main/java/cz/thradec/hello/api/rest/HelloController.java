@@ -48,7 +48,7 @@ public class HelloController {
 
     @DeleteMapping("/{id}")
     public Hello deleteHello(@PathVariable Long id) {
-        return helloRepository.delete(id);
+        return helloRepository.deleteById(id);
     }
 
 }
