@@ -1,17 +1,15 @@
 package cz.thradec.hello.service;
 
+import cz.thradec.hello.AbstractTest;
 import cz.thradec.hello.TestData;
 import net.ttddyy.dsproxy.QueryCountHolder;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.test.context.support.WithAnonymousUser;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
@@ -23,9 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.springframework.test.jdbc.JdbcTestUtils.countRowsInTableWhere;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-public class HelloRepositoryTest {
+public class HelloRepositoryTest extends AbstractTest {
 
     @Autowired
     private HelloRepository helloRepository;
