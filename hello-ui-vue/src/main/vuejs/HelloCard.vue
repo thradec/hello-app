@@ -5,10 +5,10 @@
             <div class='col s6 offset-s3'>
                 <div class='card grey lighten-4'>
                     <div class='card-content'>
-                        <h1 class='center-align' style='font-weight: 900'>{{message}}</h1>
+                        <h1 id="actual-hello" class='center-align' style='font-weight: 900'>{{message}}</h1>
                     </div>
                     <div class='card-action'>
-                        <button class='btn blue waves-effect waves-light'
+                        <button id="next-hello" class='btn blue waves-effect waves-light'
                                 @click.prevent='getRandomHello'><i class='material-icons right'>replay</i>next</button>
                     </div>
                 </div>

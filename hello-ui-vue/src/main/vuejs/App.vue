@@ -11,22 +11,22 @@
                     </span>
                     <ul class='right hide-on-med-and-down'>
                         <li>
-                            <router-link to='/hello/admin' title='Administration'>
+                            <router-link id='nav-admin' to='/hello/admin' title='Administration'>
                                 <i class='material-icons'>playlist_add</i>
                             </router-link>
                         </li>
                         <li>
-                            <router-link to='/dev' title='Development zone'>
+                            <router-link id='nav-dev' to='/dev' title='Development zone'>
                                 <i class='material-icons'>info_outline</i>
                             </router-link>
                         </li>
                         <li v-if='user.isAuthenticated'>
-                            <a href='/logout' :title='"Logout " + user.name'>
+                            <a id='nav-logout' href='/logout' :title='"Logout " + user.name'>
                                 <i class='material-icons left'>exit_to_app</i>Logout
                             </a>
                         </li>
                         <li v-else>
-                            <router-link to='/login' title='Login'>
+                            <router-link id='nav-login' to='/login' title='Login'>
                                 <i class='material-icons left'>account_circle</i>Login
                             </router-link>
                         </li>
@@ -53,8 +53,12 @@ export default {
         return {
             user: user
         };
+    },
+    created: function () {
+        user.fetchData();
     }
 }
+
 
 </script>
 
@@ -63,5 +67,6 @@ export default {
 #app-logo {
     padding-left: 20px;
 }
+
 
 </style>

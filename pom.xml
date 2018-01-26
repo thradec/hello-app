@@ -19,6 +19,9 @@
     <properties>
         <version.datasource-proxy>1.4.5</version.datasource-proxy>
         <version.springfox>2.8.0</version.springfox>
+        <version.selenium>3.8.1</version.selenium>
+        <version.webdrivermanager>2.1.0</version.webdrivermanager>
+        <version.guava>23.6-jre</version.guava>
         <version.docker-maven-plugin>0.4.13</version.docker-maven-plugin>
     </properties>
 
@@ -48,6 +51,21 @@
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-swagger-ui</artifactId>
                 <version>${version.springfox}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-java</artifactId>
+                <version>${version.selenium}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.bonigarcia</groupId>
+                <artifactId>webdrivermanager</artifactId>
+                <version>${version.webdrivermanager}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${version.guava}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

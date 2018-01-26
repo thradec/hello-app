@@ -21,7 +21,7 @@
                                 </div>
                                 <div class='row'>
                                     <div class="col s3 offset-s9">
-                                        <button type='submit' class='btn blue waves-effect waves-light'>Submit</button>
+                                        <button type='submit' id='login-btn' class='btn blue waves-effect waves-light'>Submit</button>
                                     </div>
                                 </div>
                             </form>
