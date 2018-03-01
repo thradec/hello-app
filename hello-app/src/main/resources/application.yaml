@@ -7,9 +7,11 @@ spring:
     jpa:
         properties:
             hibernate:
-            ddl-auto: validate
-            format_sql: true
-            id.new_generator_mappings: true
+              ddl-auto: validate
+              format_sql: true
+              id.new_generator_mappings: true
+              temp.use_jdbc_metadata_defaults: false
+        open-in-view: false
     ldap:
         embedded:
             base-dn: dc=thradec,dc=cz
