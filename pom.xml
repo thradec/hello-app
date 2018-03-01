@@ -87,6 +87,9 @@
 
         <profile>
             <id>db.postgres</id>
+            <properties>
+                <argLine>-Dspring.profiles.active=db.postgres</argLine>
+            </properties>
             <dependencies>
                 <dependency>
                     <groupId>org.postgresql</groupId>
