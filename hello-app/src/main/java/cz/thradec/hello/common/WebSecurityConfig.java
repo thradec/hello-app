@@ -1,4 +1,4 @@
-package cz.thradec.hello.security;
+package cz.thradec.hello.common;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

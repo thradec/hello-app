@@ -1,4 +1,4 @@
-package cz.thradec.hello.service;
+package cz.thradec.hello.domain;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;

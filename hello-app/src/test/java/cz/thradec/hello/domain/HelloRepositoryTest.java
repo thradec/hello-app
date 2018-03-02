@@ -1,4 +1,4 @@
-package cz.thradec.hello.service;
+package cz.thradec.hello.domain;
 
 import cz.thradec.hello.AbstractTest;
 import cz.thradec.hello.TestData;
@@ -13,8 +13,8 @@ import org.springframework.security.test.context.support.WithMockUser;
 
 import java.util.List;
 
-import static cz.thradec.hello.service.HelloRepository.orderById;
-import static cz.thradec.hello.service.HelloRepository.orderByMessage;
+import static cz.thradec.hello.domain.HelloRepository.orderById;
+import static cz.thradec.hello.domain.HelloRepository.orderByMessage;
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;

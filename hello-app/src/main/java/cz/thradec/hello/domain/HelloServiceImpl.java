@@ -1,4 +1,4 @@
-package cz.thradec.hello.service;
+package cz.thradec.hello.domain;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Random;
 
-import static cz.thradec.hello.service.HelloRepository.orderById;
+import static cz.thradec.hello.domain.HelloRepository.orderById;
 
 @Service
 @RequiredArgsConstructor

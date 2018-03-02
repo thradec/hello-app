@@ -2,8 +2,8 @@ package cz.thradec.hello.api.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import cz.thradec.hello.AbstractTest;
-import cz.thradec.hello.service.Hello;
-import cz.thradec.hello.service.HelloRepository;
+import cz.thradec.hello.domain.Hello;
+import cz.thradec.hello.domain.HelloRepository;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;

@@ -1,4 +1,4 @@
-package cz.thradec.hello.api.rest;
+package cz.thradec.hello.common;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

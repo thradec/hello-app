@@ -8,7 +8,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import cz.thradec.hello.service.Hello;
+import cz.thradec.hello.domain.Hello;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.CacheManager;

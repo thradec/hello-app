@@ -4,9 +4,9 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import cz.thradec.hello.service.Hello;
-import cz.thradec.hello.service.HelloRepository;
-import cz.thradec.hello.service.HelloService;
+import cz.thradec.hello.domain.Hello;
+import cz.thradec.hello.domain.HelloRepository;
+import cz.thradec.hello.domain.HelloService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.SortDefault;

@@ -1,4 +1,4 @@
-package cz.thradec.hello.service;
+package cz.thradec.hello.domain;
 
 import cz.thradec.hello.AbstractTest;
 import org.junit.Test;

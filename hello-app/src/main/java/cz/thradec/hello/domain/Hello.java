@@ -1,4 +1,4 @@
-package cz.thradec.hello.service;
+package cz.thradec.hello.domain;
 
 import java.io.Serializable;
 import java.util.Objects;
