@@ -1,7 +1,5 @@
 package cz.thradec.hello.domain;
 
-import java.util.List;
-
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -9,15 +7,17 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.Repository;
 import org.springframework.security.access.prepost.PreAuthorize;
 
+import java.util.List;
+
 @CacheConfig(cacheNames = "hello")
 public interface HelloRepository extends HelloRepositoryCustom, Repository<Hello, Long> {
 
     static Sort orderById() {
-        return new Sort("id");
+        return Sort.by("id");
     }
 
     static Sort orderByMessage() {
-        return new Sort("message");
+        return Sort.by("message");
     }
 
     @Cacheable
