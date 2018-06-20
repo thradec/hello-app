@@ -1,7 +1,7 @@
 package cz.thradec.hello.domain;
 
-import cz.thradec.hello.AbstractTest;
-import org.junit.Test;
+import cz.thradec.hello.AbstractIT;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.ConstraintViolation;
@@ -10,13 +10,17 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class HelloValidatorTest extends AbstractTest {
+class HelloValidatorIT extends AbstractIT {
+
+    private final Validator validator;
 
     @Autowired
-    private Validator validator;
+    HelloValidatorIT(Validator validator) {
+        this.validator = validator;
+    }
 
     @Test
-    public void shouldValidate() {
+    void shouldValidate() {
         Hello hello = new Hello("");
         Set<ConstraintViolation<Hello>> violations = validator.validate(hello);
 

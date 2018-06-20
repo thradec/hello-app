@@ -1,10 +1,11 @@
 package cz.thradec.hello.domain;
 
-import cz.thradec.hello.AbstractTest;
+import cz.thradec.hello.AbstractIT;
 import cz.thradec.hello.TestData;
+import lombok.RequiredArgsConstructor;
 import net.ttddyy.dsproxy.QueryCountHolder;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.access.AccessDeniedException;
@@ -21,22 +22,26 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.springframework.test.jdbc.JdbcTestUtils.countRowsInTableWhere;
 
-public class HelloRepositoryTest extends AbstractTest {
+class HelloRepositoryIT extends AbstractIT {
+
+    private final HelloRepository helloRepository;
+    private final TestData testData;
+    private final JdbcTemplate jdbcTemplate;
 
     @Autowired
-    private HelloRepository helloRepository;
-    @Autowired
-    private TestData testData;
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+    HelloRepositoryIT(HelloRepository helloRepository, TestData testData, JdbcTemplate jdbcTemplate) {
+        this.helloRepository = helloRepository;
+        this.testData = testData;
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
-    @Before
-    public void init() {
+    @BeforeEach
+    void init() {
         testData.init();
     }
 
     @Test
-    public void shouldFindAllOrderById() {
+    void shouldFindAllOrderById() {
         List<Hello> helloList = helloRepository.findAll(orderById());
         assertThat(helloList)
                 .containsExactlyElementsOf(
@@ -47,7 +52,7 @@ public class HelloRepositoryTest extends AbstractTest {
     }
 
     @Test
-    public void shouldFindAllOrderByMessage() {
+    void shouldFindAllOrderByMessage() {
         List<Hello> helloList = helloRepository.findAll(orderByMessage());
         assertThat(helloList)
                 .containsExactlyElementsOf(
@@ -58,7 +63,7 @@ public class HelloRepositoryTest extends AbstractTest {
     }
 
     @Test
-    public void shouldFindAllAndCache() {
+    void shouldFindAllAndCache() {
         QueryCountHolder.clear();
 
         helloRepository.findAll(orderById());
@@ -68,14 +73,14 @@ public class HelloRepositoryTest extends AbstractTest {
     }
 
     @Test
-    public void shouldFindRandom() {
+    void shouldFindRandom() {
         Hello hello = helloRepository.findRandom();
         assertThat(hello).isIn(testData.getHelloList());
     }
 
     @Test
     @WithMockUser(roles = "ADMIN")
-    public void shouldSaveAndDelete() {
+    void shouldSaveAndDelete() {
         Hello hello = helloRepository.save(new Hello("test"));
 
         assertThat(hello.getId()).isNotNull();
@@ -88,14 +93,14 @@ public class HelloRepositoryTest extends AbstractTest {
 
     @Test
     @WithAnonymousUser
-    public void shouldNotSaveIfNotAuthenticated() {
+    void shouldNotSaveIfNotAuthenticated() {
         assertThatThrownBy(() -> helloRepository.save(new Hello()))
                 .isInstanceOf(AccessDeniedException.class);
     }
 
     @Test
     @WithMockUser
-    public void shouldNotDeleteIfNotAdmin() {
+    void shouldNotDeleteIfNotAdmin() {
         assertThatThrownBy(() -> helloRepository.deleteById(-1L))
                 .isInstanceOf(AccessDeniedException.class);
     }

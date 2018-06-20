@@ -1,16 +1,17 @@
 package cz.thradec.hello.api.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import cz.thradec.hello.AbstractTest;
+import cz.thradec.hello.AbstractIT;
 import cz.thradec.hello.domain.Hello;
 import cz.thradec.hello.domain.HelloRepository;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
@@ -19,17 +20,20 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class HelloControllerTest extends AbstractTest {
+class HelloControllerIT extends AbstractIT {
 
-    @Autowired
-    private MockMvc mvc;
-    @Autowired
-    private ObjectMapper mapper;
+    private final MockMvc mvc;
+    private final ObjectMapper mapper;
     @MockBean
     private HelloRepository helloRepository;
 
+    HelloControllerIT(@Autowired MockMvc mvc, @Autowired ObjectMapper mapper) {
+        this.mvc = mvc;
+        this.mapper = mapper;
+    }
+
     @Test
-    public void shouldGetHello() throws Exception {
+    void shouldGetHello() throws Exception {
         given(helloRepository.findById(1L))
                 .willReturn(new Hello("mock"));
 
@@ -40,17 +44,17 @@ public class HelloControllerTest extends AbstractTest {
 
     @Test
     @WithMockUser
-    public void shouldValidateHello() throws Exception {
+    void shouldValidateHello() throws Exception {
         mvc.perform(post("/api/hello")
                 .contentType(APPLICATION_JSON)
                 .content("{}"))
                 .andExpect(status().isBadRequest())
-                .andExpect(result -> result.getResolvedException().equals(MethodArgumentNotValidException.class));
+                .andExpect(result -> assertThat(result.getResolvedException()).isInstanceOf(MethodArgumentNotValidException.class));
     }
 
     @Test
     @WithMockUser
-    public void shouldSaveHello() throws Exception {
+    void shouldSaveHello() throws Exception {
         mvc.perform(post("/api/hello")
                 .contentType(APPLICATION_JSON)
                 .content(mapper.writeValueAsString(new Hello("test"))))
@@ -61,7 +65,7 @@ public class HelloControllerTest extends AbstractTest {
 
     @Test
     @WithMockUser(roles = "ADMIN")
-    public void shouldDeleteHello() throws Exception {
+    void shouldDeleteHello() throws Exception {
         mvc.perform(delete("/api/hello/{id}", 1))
                 .andExpect(status().isOk());
 
@@ -69,14 +73,14 @@ public class HelloControllerTest extends AbstractTest {
     }
 
     @Test
-    public void shouldReturn401ForUnauthorized() throws Exception {
+    void shouldReturn401ForUnauthorized() throws Exception {
         mvc.perform(post("/api/hello"))
                 .andExpect(status().isUnauthorized());
     }
 
     @Test
     @WithMockUser(roles = "INSUFFICIENT")
-    public void shouldReturn403ForForbidden() throws Exception {
+    void shouldReturn403ForForbidden() throws Exception {
         mvc.perform(delete("/api/hello/{id}", 1))
                 .andExpect(status().isForbidden());
     }

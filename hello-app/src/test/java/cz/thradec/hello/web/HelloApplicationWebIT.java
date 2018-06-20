@@ -1,15 +1,15 @@
 package cz.thradec.hello.web;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import cz.thradec.hello.web.page.HomePage;
+import cz.thradec.hello.web.page.LoginPage;
+import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import cz.thradec.hello.web.page.HomePage;
-import cz.thradec.hello.web.page.LoginPage;
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
-public class HelloApplicationWebTest extends AbstractWebTest {
+class HelloApplicationWebIT extends AbstractWebIT {
 
     private HomePage homePage;
     private LoginPage loginPage;
@@ -21,7 +21,7 @@ public class HelloApplicationWebTest extends AbstractWebTest {
     }
 
     @Test
-    public void shouldDisplayHomePage() {
+    void shouldDisplayHomePage() {
         homePage.open();
 
         assertThat(homePage.getTitle())
@@ -33,7 +33,7 @@ public class HelloApplicationWebTest extends AbstractWebTest {
     }
 
     @Test
-    public void shouldDisplayHello() {
+    void shouldDisplayHello() {
         Set<String> hellos = new HashSet<>();
 
         homePage.open();
@@ -47,7 +47,7 @@ public class HelloApplicationWebTest extends AbstractWebTest {
     }
 
     @Test
-    public void shouldLogin() {
+    void shouldLogin() {
         loginPage.login("admin", "123456");
         assertThat(loginPage.hasLogout()).isTrue();
     }
