@@ -39,15 +39,18 @@ $ docker run -d -p 8090:8090 -t hello-app
 
 ### How to ...
  
-* use postgres docker image for testing
+* use **postgres** docker image for testing
 ```
 $ docker run --name hello-db -p 5432:5432 -e POSTGRES_PASSWORD=123456 -d postgres
 ```
 
-* use jenkins docker image for testing CI pipeline alias _Jenkinsfile_
-```
-$ docker run -p 8091:8080 -p 50000:50000 jenkins
-```
+* use **jenkins** for testing CI pipeline alias _Jenkinsfile_
+    * run jenkins docker image with pre installed blue ocean plugin
+      ```
+      $ docker run -p 8091:8080 jenkinsci/blueocean
+      ```
+    * open browser http://dockerip:8099/blue/ (admin password is printed in console)
+
 
 
 ### Testing with CURL
