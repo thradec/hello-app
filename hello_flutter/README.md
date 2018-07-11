@@ -1,8 +1,16 @@
-# hello_flutter
+# HELLO_FLUTTER
 
-A new Flutter project.
+Private simple playground application with [Flutter](https://flutter.io/).
+
+<img src="screenshot01.png" />
+&nbsp;
+<img src="screenshot02.png" />
+
 
 ## Getting Started
 
-For help getting started with Flutter, view our online
-[documentation](https://flutter.io/).
+1. [install](https://flutter.io/get-started/install/)
+1. check it `$ flutter doctor`
+1. run emulator `$ flutter emulators --launch [name]`
+1. run application `$ flutter run`
+
