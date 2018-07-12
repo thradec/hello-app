@@ -1,6 +1,7 @@
 # HELLO-APP
 
 [![Build Status](https://travis-ci.org/thradec/hello-app.svg?branch=master)](https://travis-ci.org/thradec/hello-app)
+[![Sonar Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=cz.thradec.hello%3Ahello-parent&metric=alert_status)](https://sonarcloud.io)
 
 Private simple playground application.
 
@@ -50,6 +51,16 @@ $ docker run --name hello-db -p 5432:5432 -e POSTGRES_PASSWORD=123456 -d postgre
       $ docker run -p 8091:8080 jenkinsci/blueocean
       ```
     * open browser http://dockerip:8099/blue/ (admin password is printed in console)
+
+* use **[sonarcloud.io](https://sonarcloud.io/organizations/thradec-github/projects)**
+  ```
+   $ ./mvnw clean \
+            verify \
+            sonar:sonar \
+                -Dsonar.organization=thradec-github \
+                -Dsonar.host.url=https://sonarcloud.io \
+                -Dsonar.login=[SECRET_TOKEN]
+  ```
 
 
 
